@@ -1,8 +1,12 @@
+require('dotenv').config();  // ← Añade esto en la línea 1
+
 const express = require('express');
 const path = require('path');
+// ... resto de tu código
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 
 // Verificar si hay API Key configurada (opcional, para futuro)
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
