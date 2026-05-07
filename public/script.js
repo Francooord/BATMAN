@@ -529,9 +529,9 @@ function resetZoom() {
 }
 
 // =============================================
-// ASISTENTE IA - MODO TEMPORAL (sin servidor)
+// ASISTENTE IA - CONECTADO AL SERVIDOR
 // =============================================
-function enviarMensaje() {
+async function enviarMensaje() {
     const input = document.getElementById('user-input');
     const msgText = input.value.trim();
     if (msgText === "") return;
@@ -555,11 +555,42 @@ function enviarMensaje() {
     typingIndicator.classList.remove('hidden');
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // Respuesta local con delay
-    setTimeout(() => {
+    try {
+        // Llamar a TU servidor, no directamente a Groq
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: msgText })
+        });
+
+        const data = await response.json();
         typingIndicator.classList.add('hidden');
+
+        const botDiv = document.createElement('div');
+        botDiv.className = 'msg bot';
+        
+        if (data.response) {
+            botDiv.innerHTML = `
+                <div class="msg-avatar">⚙</div>
+                <div class="msg-bubble">${data.response}</div>
+            `;
+        } else {
+            // Si hay error, usar fallback local
+            respuestaFallback(msgText, chatBox);
+            return;
+        }
+        
+        chatBox.appendChild(botDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+    } catch (error) {
+        console.error('Error:', error);
+        typingIndicator.classList.add('hidden');
+        // Si falla la conexión, usar respuesta local
         respuestaFallback(msgText, chatBox);
-    }, 1200);
+    }
 }
 
 function respuestaFallback(msgText, chatBox) {
