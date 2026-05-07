@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería a través del Tiempo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <span class="logo-icon">⚙</span>
+            <span>Intro a la <strong>Ingeniería</strong></span>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#inicio" class="nav-link active" data-section="inicio">Inicio</a></li>
+            <li><a href="#mapa" class="nav-link" data-section="mapa">Quiz</a></li>
+            <li><a href="#recursos" class="nav-link" data-section="recursos">Recursos</a></li>
+            <li><a href="#ia-section" class="nav-link" data-section="ia-section">Asistente IA</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== SECCIÓN 1: INICIO ===== -->
+    <section id="inicio" class="page-section active-section">
+        <div class="hero">
+            <div class="hero-bg-grid"></div>
+            <div class="hero-particles" id="particles"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Introducción a la Ingeniería de Software
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Evolución de la</span>
+                    <span class="title-line accent">Ingeniería</span>
+                    <span class="title-line">a través del Tiempo</span>
+                </h1>
+                <p class="hero-desc">Explora cómo la ingeniería transformó la humanidad, era por era. Un recorrido interactivo desde la antigüedad hasta la inteligencia artificial.</p>
+                <div class="hero-actions">
+                    <a href="#mapa" class="btn-primary" onclick="goToSection('mapa')">
+                        <span>Comenzar Recorrido</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#recursos" class="btn-secondary" onclick="goToSection('recursos')">Ver Recursos</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-num" id="stat-eras">4</span><span class="stat-label">Eras Históricas</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat"><span class="stat-num" id="stat-groups">3</span><span class="stat-label">Grupos de Trabajo</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat"><span class="stat-num" id="stat-score">0</span><span class="stat-label">Puntuación Quiz</span></div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="gear-container">
+                    <div class="gear gear-1">⚙</div>
+                    <div class="gear gear-2">⚙</div>
+                    <div class="gear gear-3">⚙</div>
+                </div>
+                <div class="timeline-preview">
+                    <div class="tp-item" style="--d:0s" onclick="goToSection('mapa')">🏛 Edad Antigua</div>
+                    <div class="tp-item" style="--d:.15s" onclick="goToSection('mapa')">⛪ Edad Media</div>
+                    <div class="tp-item" style="--d:.3s" onclick="goToSection('mapa')">🔧 Rev. Industrial</div>
+                    <div class="tp-item" style="--d:.45s" onclick="goToSection('mapa')">🤖 Era Moderna</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN 2: MAPA / QUIZ ===== -->
+    <section id="mapa" class="page-section">
+        <div class="section-wrapper">
+            <div class="section-header">
+                <span class="section-tag">Gamificado</span>
+                <h2 class="section-title">Línea del Tiempo</h2>
+                <p class="section-sub">Responde correctamente para desbloquear la siguiente era histórica. ¡Cada acierto suma puntos!</p>
+            </div>
+
+            <!-- Timeline Visual -->
+            <div class="timeline-map">
+                <div class="tl-connector"></div>
+                <div class="checkpoints">
+                    <div class="cp active" id="cp1" data-era="1" onclick="abrirQuiz(1)">
+                        <div class="cp-icon">🏛</div>
+                        <div class="cp-dot unlocked">1</div>
+                        <div class="cp-label">Edad Antigua</div>
+                        <div class="cp-sublabel">3000 a.C – 500 d.C</div>
+                        <div class="cp-status">✓ Disponible</div>
+                    </div>
+                    <div class="cp locked" id="cp2" data-era="2" onclick="abrirQuiz(2)">
+                        <div class="cp-icon">⛪</div>
+                        <div class="cp-dot">2</div>
+                        <div class="cp-label">Edad Media</div>
+                        <div class="cp-sublabel">500 – 1500 d.C</div>
+                        <div class="cp-status">🔒 Bloqueado</div>
+                    </div>
+                    <div class="cp locked" id="cp3" data-era="3" onclick="abrirQuiz(3)">
+                        <div class="cp-icon">🔧</div>
+                        <div class="cp-dot">3</div>
+                        <div class="cp-label">Rev. Industrial</div>
+                        <div class="cp-sublabel">1760 – 1840</div>
+                        <div class="cp-status">🔒 Bloqueado</div>
+                    </div>
+                    <div class="cp locked" id="cp4" data-era="4" onclick="abrirQuiz(4)">
+                        <div class="cp-icon">🤖</div>
+                        <div class="cp-dot">4</div>
+                        <div class="cp-label">Era Moderna</div>
+                        <div class="cp-sublabel">Siglo XXI</div>
+                        <div class="cp-status">🔒 Bloqueado</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-area">
+                <div class="progress-label">
+                    <span>Progreso del Recorrido</span>
+                    <span id="progress-text">0 / 4 completadas</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+                </div>
+            </div>
+
+            <!-- Score Board -->
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="score-icon">⭐</span>
+                    <span class="score-label">Puntuación Total</span>
+                    <span class="score-value" id="total-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-icon">🏆</span>
+                    <span class="score-label">Mejor Racha</span>
+                    <span class="score-value" id="best-streak">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-icon">🎯</span>
+                    <span class="score-label">Precisión</span>
+                    <span class="score-value" id="accuracy">0%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL QUIZ -->
+    <div id="quiz-modal" class="modal-overlay" onclick="closeOnOverlay(event,'quiz-modal')">
+        <div class="quiz-modal-box">
+            <button class="modal-x" onclick="cerrarModal()">✕</button>
+            <div class="quiz-era-badge" id="quiz-era-badge"></div>
+            <h3 class="quiz-modal-title" id="quiz-title">Desafío</h3>
+            <div class="quiz-timer" id="quiz-timer">
+                <div class="timer-bar" id="timer-bar"></div>
+                <span class="timer-text" id="timer-text">30s</span>
+            </div>
+            <p class="quiz-modal-q" id="quiz-question"></p>
+
+            <div id="quiz-options" class="quiz-options-grid"></div>
+
+            <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+
+            <div class="quiz-streak" id="quiz-streak"></div>
+        </div>
+    </div>
+
+    <!-- ===== SECCIÓN 3: RECURSOS ===== -->
+    <section id="recursos" class="page-section">
+        <div class="section-wrapper">
+            <div class="section-header">
+                <span class="section-tag">Material Académico</span>
+                <h2 class="section-title">Banco de Información</h2>
+                <p class="section-sub">Recursos preparados por cada grupo. Haz clic en una tarjeta para ver la descripción y previsualizar las diapositivas.</p>
+            </div>
+            <div class="recursos-grid">
+                <div class="recurso-card" onclick="abrirDiapositivas(1)">
+                    <div class="rc-era-tag">Grupo 1</div>
+                    <div class="rc-icon">🏛</div>
+                    <h3>Antigüedad</h3>
+                    <p>Egipto, Mesopotamia, los grandes acueductos romanos y las estructuras megalíticas que definieron la ingeniería antigua.</p>
+                    <div class="rc-topics">
+                        <span>Pirámides</span><span>Acueductos</span><span>Geometría</span>
+                    </div>
+                    <button class="rc-btn">Ver Diapositivas →</button>
+                </div>
+                <div class="recurso-card" onclick="abrirDiapositivas(2)">
+                    <div class="rc-era-tag">Grupo 2</div>
+                    <div class="rc-icon">⛪</div>
+                    <h3>Medievo</h3>
+                    <p>Ingeniería militar, catedrales góticas, molinos de viento y castillos medievales que marcaron una época.</p>
+                    <div class="rc-topics">
+                        <span>Gótico</span><span>Castillos</span><span>Molinos</span>
+                    </div>
+                    <button class="rc-btn">Ver Diapositivas →</button>
+                </div>
+                <div class="recurso-card" onclick="abrirDiapositivas(3)">
+                    <div class="rc-era-tag">Grupo 3</div>
+                    <div class="rc-icon">🔧</div>
+                    <h3>Industrial</h3>
+                    <p>Máquina de vapor, producción en masa, ferrocarriles y el nacimiento de la industria moderna.</p>
+                    <div class="rc-topics">
+                        <span>Vapor</span><span>Ferrocarril</span><span>Acero</span>
+                    </div>
+                    <button class="rc-btn">Ver Diapositivas →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL DIAPOSITIVAS -->
+    <div id="slides-modal" class="modal-overlay" onclick="closeOnOverlay(event,'slides-modal')">
+        <div class="slides-modal-box">
+            <button class="modal-x" onclick="cerrarSlides()">✕</button>
+            <div class="slides-header">
+                <div class="slides-badge" id="slides-badge"></div>
+                <h3 class="slides-title" id="slides-title"></h3>
+                <p class="slides-desc" id="slides-desc"></p>
+            </div>
+            <div class="slides-preview-area">
+                <div id="pdf-viewer" class="pdf-viewer">
+                    <div class="pdf-toolbar">
+                        <button onclick="prevPage()">‹ Anterior</button>
+                        <span id="pdf-page-info">Cargando PDF...</span>
+                        <button onclick="nextPage()">Siguiente ›</button>
+                        <button onclick="zoomIn()">🔍+</button>
+                        <button onclick="zoomOut()">🔍-</button>
+                        <button onclick="resetZoom()">⟲ Reset</button>
+                    </div>
+                    <div class="pdf-canvas-wrapper">
+                        <canvas id="pdf-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="slides-footer">
+                <span class="slides-hint">💡 Visualizando diapositivas del grupo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SECCIÓN 4: ASISTENTE IA ===== -->
+    <section id="ia-section" class="page-section">
+        <div class="section-wrapper ia-wrapper">
+            <div class="section-header">
+                <span class="section-tag">Asistente Virtual</span>
+                <h2 class="section-title">Asistente Educativo</h2>
+                <p class="section-sub">Pregúntale sobre cualquier era histórica, concepto de ingeniería o exposición del curso.</p>
+            </div>
+
+            <div class="chat-shell" id="chat-shell">
+                <div class="chat-topbar">
+                    <div class="chat-avatar">⚙</div>
+                    <div>
+                        <div class="chat-name">Asistente de Ingeniería</div>
+                        <div class="chat-status"><span class="online-dot"></span> En línea</div>
+                    </div>
+                </div>
+                <div id="chat-box" class="chat-box">
+                    <div class="msg bot">
+                        <div class="msg-avatar">⚙</div>
+                        <div class="msg-bubble">¡Hola! Soy tu asistente de <strong>Introducción a la Ingeniería de Software</strong>. Puedo ayudarte con:<br><br>
+                        🏛 Historia de la ingeniería<br>
+                        🔧 Conceptos técnicos<br>
+                        🤖 Ingeniería moderna y Software<br><br>
+                        ¿Qué quieres explorar hoy?</div>
+                    </div>
+                </div>
+                <div id="typing-indicator" class="typing-indicator hidden">
+                    <div class="msg bot">
+                        <div class="msg-avatar">⚙</div>
+                        <div class="msg-bubble typing-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Escribe tu pregunta sobre ingeniería..." onkeydown="if(event.key==='Enter') enviarMensaje()">
+                    <button class="send-btn" onclick="enviarMensaje()" aria-label="Enviar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚙</span>
+                <span>Ingeniería a través del Tiempo</span>
+            </div>
+            <div class="footer-creators">
+                <span class="footer-label">Creadores:</span>
+                <div class="creators-list">
+                    <span>Esteban Franco</span>
+                    <span class="dot-sep">·</span>
+                    <span>Juan Gutiérrez</span>
+                    <span class="dot-sep">·</span>
+                    <span>Josue Loyo</span>
+                </div>
+            </div>
+            <div class="footer-copy">
+                © 2024 · Proyecto Introducción a la Ingeniería de Software · Universidad
+            </div>
+        </div>
+    </footer>
+
+    <!-- PDF.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "ingenieria-tiempo-web",
+  "version": "1.0.0",
+  "description": "Proyecto Introduccion a la Ingenieria de Software - Evolucion de la Ingenieria a traves del Tiempo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "ingenieria",
+    "software",
+    "educacion",
+    "timeline",
+    "quiz"
+  ],
+  "author": "Esteban Franco, Juan Gutierrez, Josue Loyo",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
