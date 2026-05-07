@@ -430,6 +430,12 @@ const recursosData = {
         icon: "🔧",
         desc: "La revolución que cambió el mundo: máquina de vapor, ferrocarriles, producción en masa y los cimientos de la ingeniería moderna.",
         pdf: "recurso3.pdf"
+    },
+    4: {
+        title: "SIGLO XX",
+        icon: "🔧",
+        desc: "La revolución que cambió el mundo: máquina de vapor, ferrocarriles, producción en masa y los cimientos de la ingeniería moderna.",
+        pdf: "recurso4.pdf"
     }
 };
 
