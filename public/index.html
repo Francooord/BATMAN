@@ -22,6 +22,7 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="#inicio" class="nav-link active" data-section="inicio">Inicio</a></li>
             <li><a href="#mapa" class="nav-link" data-section="mapa">Quiz</a></li>
+            <li><a href="#juego" class="nav-link" data-section="juego">🎮 Jugar</a></li>
             <li><a href="#recursos" class="nav-link" data-section="recursos">Recursos</a></li>
             <li><a href="#ia-section" class="nav-link" data-section="ia-section">Asistente IA</a></li>
         </ul>
@@ -253,6 +254,84 @@
         </div>
     </section>
 
+
+    <!-- ===== SECCIÓN JUEGO: MINE CART ===== -->
+    <section id="juego" class="page-section">
+        <div class="section-wrapper game-wrapper">
+            <div class="section-header">
+                <span class="section-tag">🎮 Minijuego</span>
+                <h2 class="section-title">Carrito del Ingeniero</h2>
+                <p class="section-sub">¡Guía al ingeniero por las eras históricas! Responde preguntas y toma decisiones en las bifurcaciones.</p>
+            </div>
+            <div class="game-container" id="game-container">
+                <canvas id="game-canvas"></canvas>
+                <div class="game-ui-overlay" id="game-ui">
+                    <div class="game-screen" id="screen-start">
+                        <div class="start-engineer-anim" id="start-anim-svg"></div>
+                        <h2 class="game-screen-title">¡El Carrito del Ingeniero!</h2>
+                        <p class="game-screen-sub">Usa <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> en las bifurcaciones para elegir la respuesta correcta.<br>¡Falla y el carrito choca!</p>
+                        <div class="game-era-select">
+                            <p style="margin-bottom:12px;font-weight:600;color:var(--accent)">Selecciona la Era:</p>
+                            <div class="era-btns">
+                                <button class="era-btn active" data-era="1">&#127963; Antigua</button>
+                                <button class="era-btn" data-era="2">&#9962; Medieval</button>
+                                <button class="era-btn" data-era="3">&#128295; Industrial</button>
+                                <button class="era-btn" data-era="4">&#129302; Moderna</button>
+                            </div>
+                        </div>
+                        <button class="btn-primary game-start-btn" id="start-game-btn">
+                            <span>&#128640; &#161;Iniciar Juego!</span>
+                        </button>
+                    </div>
+                    <div class="game-screen hidden" id="screen-question">
+                        <div class="game-question-box">
+                            <div class="gq-era-tag" id="gq-era-tag"></div>
+                            <p class="gq-text" id="gq-text"></p>
+                            <div class="gq-choices" id="gq-choices"></div>
+                            <div class="gq-arrows-hint">
+                                <span>&#8592; Flechas del teclado para elegir &#8594;</span>
+                            </div>
+                            <div class="gq-timer-bar"><div class="gq-timer-fill" id="gq-timer-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="game-screen hidden" id="screen-gameover">
+                        <div class="go-crash-svg" id="go-crash-svg"></div>
+                        <h2 class="game-screen-title go-title">&#128165; &#161;GAME OVER!</h2>
+                        <p class="go-reason" id="go-reason"></p>
+                        <div class="go-score-display">
+                            <div class="go-stat"><span class="go-stat-n" id="go-score">0</span><span class="go-stat-l">Puntos</span></div>
+                            <div class="go-stat"><span class="go-stat-n" id="go-correct">0</span><span class="go-stat-l">Correctas</span></div>
+                            <div class="go-stat"><span class="go-stat-n" id="go-dist">0m</span><span class="go-stat-l">Distancia</span></div>
+                        </div>
+                        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+                            <button class="btn-primary game-start-btn" id="restart-game-btn"><span>&#128260; Jugar de Nuevo</span></button>
+                            <button class="btn-secondary" style="padding:12px 24px;border-radius:50px" onclick="goToSection('mapa')">Ver Quiz</button>
+                        </div>
+                    </div>
+                    <div class="game-screen hidden" id="screen-win">
+                        <div class="win-svg" id="win-svg"></div>
+                        <h2 class="game-screen-title" style="color:var(--gold)">&#127942; &#161;Era Completada!</h2>
+                        <p class="game-screen-sub" id="win-msg">&#161;Eres un verdadero Ingeniero!</p>
+                        <div class="go-score-display">
+                            <div class="go-stat"><span class="go-stat-n" id="win-score">0</span><span class="go-stat-l">Puntos</span></div>
+                            <div class="go-stat"><span class="go-stat-n" id="win-correct">0</span><span class="go-stat-l">Correctas</span></div>
+                            <div class="go-stat"><span class="go-stat-n" id="win-combo">0x</span><span class="go-stat-l">Combo Max</span></div>
+                        </div>
+                        <button class="btn-primary game-start-btn" id="win-restart-btn"><span>&#128260; Volver a Jugar</span></button>
+                    </div>
+                </div>
+                <div class="game-hud hidden" id="game-hud">
+                    <div class="hud-left"><span class="hud-era" id="hud-era">&#127963; Antigua</span></div>
+                    <div class="hud-center"><span class="hud-lives" id="hud-lives">&#10084;&#65039;&#10084;&#65039;&#10084;&#65039;</span></div>
+                    <div class="hud-right">
+                        <span class="hud-score-label">Pts</span>
+                        <span class="hud-score" id="hud-score">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- MODAL DIAPOSITIVAS -->
     <div id="slides-modal" class="modal-overlay" onclick="closeOnOverlay(event,'slides-modal')">
         <div class="slides-modal-box">
@@ -344,7 +423,7 @@
                 </div>
             </div>
             <div class="footer-copy">
-                © 2026 · Proyecto Introducción a la Ingeniería de Software · Universidad Surcolombiana
+                © 2024 · Proyecto Introducción a la Ingeniería de Software · Universidad
             </div>
         </div>
     </footer>
