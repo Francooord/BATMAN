@@ -223,7 +223,7 @@ body::before {
     gap: 4rem;
     padding: clamp(4rem, 8vw, 8rem) clamp(2rem, 8vw, 7rem);
     min-height: calc(100vh - var(--nav-h));
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* Grid background — finer, more elegant */
@@ -605,6 +605,8 @@ body::before {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+    background: none;
+    overflow: visible;
 }
 
 .section-header {
@@ -661,7 +663,7 @@ body::before {
    QUIZ / TIMELINE MAP — PREMIUM
    ============================================= */
 #mapa {
-    background: var(--bg2);
+    background: transparent;
     position: relative;
 }
 
@@ -1247,7 +1249,7 @@ body::before {
    RECURSOS — PREMIUM GRID CARDS
    ============================================= */
 #recursos {
-    background: var(--bg);
+    background: transparent;
     position: relative;
 }
 
@@ -1540,7 +1542,7 @@ body::before {
    ASISTENTE IA — PREMIUM CHAT
    ============================================= */
 #ia-section {
-    background: var(--bg2);
+    background: transparent;
     position: relative;
 }
 
