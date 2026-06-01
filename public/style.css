@@ -200,7 +200,7 @@ body::before {
     padding-top: var(--nav-h);
     flex-direction: column;
     position: relative;
-    animation: fadeInSection 0.6s cubic-bezier(0.4,0,0.2,1);
+    animation: fadeInSection 0.5s cubic-bezier(0.4,0,0.2,1);
     z-index: 1;
 }
 
@@ -2401,4 +2401,18 @@ body::before {
     .hero-visual { display: none; }
     .chat-box { height: 200px; }
     .slides-modal-box { max-height: 95vh; }
+}
+.global-bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    mask-image: none;
+}
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    mask-image: none;
 }
